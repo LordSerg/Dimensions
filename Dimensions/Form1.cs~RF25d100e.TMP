@@ -1,0 +1,101 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Dimensions
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+        Bitmap b;
+        Graphics g;
+        d2 []P;
+        private void TrackBar1_Scroll(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void TrackBar2_Scroll(object sender, EventArgs e)
+        {
+            
+        }
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            d2.reset();
+            P = new d2[5000];
+            Random r = new Random();
+            for (int i = 0; i < 5000; i++)
+                P[i] = new d2(r.Next(-300, 300), r.Next(-300, 300),2);
+            //P[0] = new d2(0, 100);
+            //P[1] = new d2(100, 0);
+            //P[2] = new d2(-100, 0);
+            b = new Bitmap(pictureBox1.Width,pictureBox1.Height);
+            pictureBox1.Refresh();
+            g = Graphics.FromImage(b);
+            g.Clear(Color.Black);
+            Draw(P);
+        }
+        void Draw(d2[] point)
+        {
+            for (int i = 0; i < point.Length; i++)
+                d2.draw(point[i], pictureBox1, g);
+            //d2.draw(E1, pictureBox1, g);
+            g.DrawLine(Pens.Red, (float)d2.E1.C[0]*10+pictureBox1.Width/2, (float)d2.E1.C[1]*10+pictureBox1.Height/2, pictureBox1.Width / 2, pictureBox1.Height / 2);
+            g.DrawLine(Pens.Blue, (float)d2.E2.C[0]*10+ pictureBox1.Width / 2, (float)d2.E2.C[1]*10+ pictureBox1.Height / 2, pictureBox1.Width / 2, pictureBox1.Height / 2);
+            //pictureBox1.Refresh();
+            //g = Graphics.FromImage(b);
+            //g.Clear(Color.Black);
+            //g.DrawLine(Pens.White, (int)point.x+pictureBox1.Width/2, (int)point.y+pictureBox1.Height/2, (int)point.x + 5+pictureBox1.Width/2, (int)point.y + 5+pictureBox1.Height/2);
+            //pictureBox1.Image = b;
+        }
+
+        private void PictureBox1_SizeChanged(object sender, EventArgs e)
+        {
+            if (pictureBox1.Width != 0 && pictureBox1.Height != 0)
+                b = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            pictureBox1.Refresh();
+            g = Graphics.FromImage(b);
+            g.Clear(Color.Black);
+        }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            timer1.Enabled = !timer1.Enabled;
+        }
+
+        private void Timer1_Tick(object sender, EventArgs e)
+        {
+            d2.rotate(1);
+            pictureBox1.Refresh();
+            g = Graphics.FromImage(b);
+            g.Clear(Color.Black);
+            Draw(P);
+            pictureBox1.Image = b;
+            label1.Text = d2.E1.C[0] + " " + d2.E1.C[1];
+            label2.Text = d2.E2.C[0] + " " + d2.E2.C[1];
+            //d2.reset();
+        }
+
+        private void Button2_Click(object sender, EventArgs e)
+        {
+            d2.rotate(-1);
+            pictureBox1.Refresh();
+            g = Graphics.FromImage(b);
+            g.Clear(Color.Black);
+            Draw(P);
+            pictureBox1.Image = b;
+            label1.Text = d2.E1.C[0] + " " + d2.E1.C[1];
+            label2.Text = d2.E2.C[0] + " " + d2.E2.C[1];
+            //d2.reset();
+        }
+    }
+}
