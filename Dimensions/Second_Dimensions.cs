@@ -31,16 +31,12 @@ namespace Dimensions
         }
         public static void rotate(double angle)
         {
-            Angle+=angle*Math.PI/180;//+градус
-            Vector e1, e2;//временные координаты
-            e1 = new Vector(1, 0);
-            e2 = new Vector(0, 1);
-            //так должно работать:
-            //E1 = Vector.Add(Vector.M(Math.Cos(Angle), e1), Vector.M(Math.Sin(Angle), e2));
-            //E2 = Vector.Add(Vector.M(-1 * Math.Sin(Angle), e1), Vector.M(Math.Cos(Angle), e2));
-            //так работает:
-            E1 = new Vector(Math.Cos(Angle) * (e1.C[0] + e2.C[0]), Math.Sin(Angle) * (e2.C[1] + e1.C[1]));
-            E2 = new Vector(-1 * Math.Sin(Angle) * (e1.C[0] + e2.C[0]), Math.Cos(Angle) * (e2.C[1] + e1.C[1]));
+            angle *= Math.PI / 180;//градус
+            Vector e1, e2;//врЕменные координаты
+            e1 = E1;
+            e2 = E2;
+            E1 = new Vector(Math.Cos(angle) * (e1.C[0]) + Math.Sin(angle) * (e2.C[0]), Math.Cos(angle) * (e1.C[1]) + Math.Sin(angle) * (e2.C[1]));
+            E2 = new Vector(-Math.Sin(angle) * (e1.C[0]) + Math.Cos(angle) * (e2.C[0]), -Math.Sin(angle) * (e1.C[1]) + Math.Cos(angle) * (e2.C[1]));
             //матрица перехода:
             /* x       y
              cos(a)  sin(a)
@@ -49,22 +45,35 @@ namespace Dimensions
         }
         public static void draw_point(d2 point, PictureBox p, Graphics g)
         {//отображение точки на пикчерБоксе
-            point.x = point.X * E1[0] + point.Y * E1[1];
-            point.y = point.X * E2[0] + point.Y * E2[1];
-            g.FillEllipse(Brushes.White, (float)point.x + p.Width / 2, (float)point.y + p.Height / 2, point.Size, point.Size);
+            point.x = point.X * E1[0] + point.Y * E2[0];
+            point.y = point.X * E1[1] + point.Y * E2[1];
+            g.FillEllipse(Brushes.Black, (float)point.x + p.Width / 2, (float)point.y + p.Height / 2, point.Size, point.Size);
         }
         public static void draw_line(d2 point1, d2 point2, PictureBox p, Graphics g)
         {
-            point1.x = point1.X * E1[0] + point1.Y * E1[1];
-            point1.y = point1.X * E2[0] + point1.Y * E2[1];
-            point2.x = point2.X * E1[0] + point2.Y * E1[1];
-            point2.y = point2.X * E2[0] + point2.Y * E2[1];
-            g.DrawLine(Pens.White, (float)point1.x + p.Width / 2, (float)point1.y + p.Height / 2, (float)point2.x + p.Width / 2, (float)point2.y + p.Height / 2);
+            point1.x = point1.X * E1[0] + point1.Y * E2[0];
+            point1.y = point1.X * E1[1] + point1.Y * E2[1];
+            point2.x = point2.X * E1[0] + point2.Y * E2[0];
+            point2.y = point2.X * E1[1] + point2.Y * E2[1];
+            g.DrawLine(Pens.Black, (float)point1.x + p.Width / 2, (float)point1.y + p.Height / 2, (float)point2.x + p.Width / 2, (float)point2.y + p.Height / 2);
         }
         public static void reset()
         {//анулирование базисов (или инициализация)
             E1 = new Vector(1, 0);//базис Х
             E2 = new Vector(0, 1);//базис У
+        }
+        static void draw_line_color(d2 point1, d2 point2, PictureBox p, Graphics g, Color col)
+        {
+            Pen pn = new Pen(col);
+            g.DrawLine(pn, (float)point1.X + p.Width / 2, (float)point1.Y + p.Height / 2, (float)point2.X + p.Width / 2, (float)point2.Y + p.Height / 2);
+        }
+        public static void draw_basis(PictureBox p, Graphics g)
+        {
+            d2 x = new d2(100 * E1[0], 100 * E1[1]);
+            d2 y = new d2(100 * E2[0], 100 * E2[1]);
+            d2 zero = new d2(0, 0);
+            draw_line_color(zero, x, p, g, Color.Red);
+            draw_line_color(zero, y, p, g, Color.Green);
         }
     }
 }

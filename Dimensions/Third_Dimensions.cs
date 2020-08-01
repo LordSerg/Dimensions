@@ -30,30 +30,55 @@ namespace Dimensions
         }
         public static void rotate(double angle1,double angle2,double angle3)
         {
-            AngleOX += angle1 * Math.PI / 180;//вокруг OX
-            AngleOY += angle2 * Math.PI / 180;//вокруг OY
-            AngleOZ += angle3 * Math.PI / 180;//вокруг OZ
+            angle1 *= Math.PI / 180;
+            angle2 *= Math.PI / 180;
+            angle3 *= Math.PI / 180;
+            //AngleOX += angle1 * Math.PI / 180;//вокруг OX
+            //AngleOY += angle2 * Math.PI / 180;//вокруг OY
+            //AngleOZ += angle3 * Math.PI / 180;//вокруг OZ
             Vector e1, e2, e3;
             e1 = E1;
             e2 = E2;
             e3 = E3;
             //вариант с перемножением матриц:
-            E1 = new Vector(Math.Cos(AngleOY) * Math.Cos(AngleOZ) * (e1.C[0] + e2.C[0] + e3.C[0]), Math.Cos(AngleOY) * Math.Sin(AngleOZ) * (e1.C[1] + e2.C[1] + e3.C[1]), Math.Sin(AngleOY) * (e1.C[2] + e2.C[2] + e3.C[2]));
-            E2 = new Vector((-(Math.Sin(AngleOX) * Math.Sin(AngleOY) * Math.Cos(AngleOZ)) - (Math.Cos(AngleOX) * Math.Sin(AngleOZ))) * (e1.C[0] + e2.C[0] + e3.C[0]), (-(Math.Sin(AngleOX) * Math.Sin(AngleOY) * Math.Sin(AngleOZ)) + (Math.Cos(AngleOX) * Math.Cos(AngleOZ))) * (e1.C[1] + e2.C[1] + e3.C[1]), Math.Sin(AngleOX) * Math.Cos(AngleOY) * (e1.C[2] + e2.C[2] + e3.C[2]));
-            E3 = new Vector((-(Math.Cos(AngleOX) * Math.Sin(AngleOY) * Math.Cos(AngleOZ)) + (Math.Sin(AngleOX) * Math.Sin(AngleOZ))) * (e1.C[0] + e2.C[0] + e3.C[0]), (-(Math.Cos(AngleOX) * Math.Sin(AngleOY) * Math.Sin(AngleOZ)) - (Math.Sin(AngleOX) * Math.Cos(AngleOZ))) * (e1.C[1] + e2.C[1] + e3.C[1]), Math.Cos(AngleOX) * Math.Cos(AngleOY) * (e1.C[2] + e2.C[2] + e3.C[2]));
+            //E1 = new Vector(Math.Cos(angle2) * Math.Cos(angle3) * (e1.C[0]) + Math.Cos(angle2) * Math.Sin(angle3) * (e2.C[0]) + Math.Sin(angle2) * (e3.C[0]), Math.Cos(angle2) * Math.Cos(angle3) * (e1.C[1]) + Math.Cos(angle2) * Math.Sin(angle3) * (e2.C[1]) + Math.Sin(angle2) * (e3.C[1]), Math.Cos(angle2) * Math.Cos(angle3) * (e1.C[2]) + Math.Cos(angle2) * Math.Sin(angle3) * (e2.C[2]) + Math.Sin(angle2) * (e3.C[2]));
+            //E2 = new Vector((-(Math.Sin(angle1) * Math.Sin(angle2) * Math.Cos(angle3)) - (Math.Cos(angle1) * Math.Sin(angle3))) * (e1.C[0]) + (-(Math.Sin(angle1) * Math.Sin(angle2) * Math.Sin(angle3)) + (Math.Cos(angle1) * Math.Cos(angle3))) * (e2.C[0]) + Math.Sin(angle1) * Math.Cos(angle2) * (e3.C[0]), (-(Math.Sin(angle1) * Math.Sin(angle2) * Math.Cos(angle3)) - (Math.Cos(angle1) * Math.Sin(angle3))) * (e1.C[1]) +(-(Math.Sin(angle1) * Math.Sin(angle2) * Math.Sin(angle3)) + (Math.Cos(angle1) * Math.Cos(angle3)))  *(e2.C[1]) + Math.Sin(angle1) * Math.Cos(angle2) * (e3.C[1]), (-(Math.Sin(angle1) * Math.Sin(angle2) * Math.Cos(angle3)) - (Math.Cos(angle1) * Math.Sin(angle3))) * (e1.C[2]) + (-(Math.Sin(angle1) * Math.Sin(angle2) * Math.Sin(angle3)) + (Math.Cos(angle1) * Math.Cos(angle3))) * (e2.C[2]) + Math.Sin(angle1) * Math.Cos(angle2)*(e3.C[2]));
+            //E3 = new Vector((-(Math.Cos(angle1) * Math.Sin(angle2) * Math.Cos(angle3)) + (Math.Sin(angle1) * Math.Sin(angle3))) * (e1.C[0]) + (-(Math.Cos(angle1) * Math.Sin(angle2) * Math.Sin(angle3)) - (Math.Sin(angle1) * Math.Cos(angle3))) * (e2.C[0]) + Math.Cos(angle1) * Math.Cos(angle2) * (e3.C[0]), (-(Math.Cos(angle1) * Math.Sin(angle2) * Math.Cos(angle3)) + (Math.Sin(angle1) * Math.Sin(angle3))) * (e1.C[1]) +(-(Math.Cos(angle1) * Math.Sin(angle2) * Math.Sin(angle3)) - (Math.Sin(angle1) * Math.Cos(angle3)))  *(e2.C[1]) + Math.Cos(angle1) * Math.Cos(angle2) * (e3.C[1]), (-(Math.Cos(angle1) * Math.Sin(angle2) * Math.Cos(angle3)) + (Math.Sin(angle1) * Math.Sin(angle3))) * (e1.C[2]) + (-(Math.Cos(angle1) * Math.Sin(angle2) * Math.Sin(angle3)) - (Math.Sin(angle1) * Math.Cos(angle3))) * (e2.C[2]) + Math.Cos(angle1) * Math.Cos(angle2)*(e3.C[2]));
+            //E1 = new Vector(1, 0, 0);
+            //E2 = new Vector(0, 1, 0);
+            //E3 = new Vector(0, 0, 1);
+            //e1 = E1;
+            //e2 = E2;
+            //e3 = E3;
+
             //вариант с поочередным поворотом с начала по OX, потом OY, потом OZ
-            //E1 = new Vector((e1.C[0] + e2.C[0] + e3.C[0]), 0, 0);
-            //E2 = new Vector(0, Math.Cos(AngleOX) * (e1.C[1] + e2.C[1] + e3.C[1]), Math.Sin(AngleOX) * (e1.C[2] + e2.C[2] + e3.C[2]));
-            //E3 = new Vector(0, -Math.Sin(AngleOX) * (e1.C[1] + e2.C[1] + e3.C[1]), Math.Cos(AngleOX) * (e1.C[2] + e2.C[2] + e3.C[2]));
+            
+            if (angle1 != 0)
+            {
+                //E1 = e1;// new Vector(1 * e1.C[0] + 0 * e2.C[0] + 0 * e3.C[0], 1 * e1.C[1] + 0 * e2.C[1] + 0 * e3.C[1], 1 * e1.C[2] + 0 * e2.C[2] + 0 * e3.C[2]);
+                E2 = new Vector(0 * e1.C[0] + Math.Cos(angle1) * e2.C[0] + Math.Sin(angle1) * e3.C[0], 0 * e1.C[1] + Math.Cos(angle1) * e2.C[1] + Math.Sin(angle1) * e3.C[1], 0 * e1.C[2] + Math.Cos(angle1) * e2.C[2] + Math.Sin(angle1) * e3.C[2]);
+                E3 = new Vector(0 * e1.C[0] - Math.Sin(angle1) * e2.C[0] + Math.Cos(angle1) * e3.C[0], 0 * e1.C[1] - Math.Sin(angle1) * e2.C[1] + Math.Cos(angle1) * e3.C[1], 0 * e1.C[2] - Math.Sin(angle1) * e2.C[2] + Math.Cos(angle1) * e3.C[2]);
+                //e1 = E1;
+                e2 = E2;
+                e3 = E3;
 
-            //E1 = new Vector(Math.Cos(AngleOY) * (e1.C[0] + e2.C[0] + e3.C[0]), 0, Math.Sin(AngleOY) * (e1.C[2] + e2.C[2] + e3.C[2]));
-            //E2 = new Vector(0, (e1.C[1] + e2.C[1] + e3.C[1]), 0);
-            //E3 = new Vector(-Math.Sin(AngleOY) * (e1.C[0] + e2.C[0] + e3.C[0]), 0, Math.Cos(AngleOY) * (e1.C[2] + e2.C[2] + e3.C[2]));
-
-            //E1 = new Vector(Math.Cos(AngleOZ) * (e1.C[0] + e2.C[0] + e3.C[0]), Math.Sin(AngleOZ) * (e1.C[1] + e2.C[1] + e3.C[1]), 0);
-            //E2 = new Vector(-Math.Sin(AngleOZ) * (e1.C[0] + e2.C[0] + e3.C[0]), Math.Cos(AngleOZ) * (e1.C[1] + e2.C[1] + e3.C[1]), 0);
-            //E3 = new Vector(0, 0, (e1.C[2] + e2.C[2] + e3.C[2]));
-
+            }
+            if (angle2 != 0)
+            {
+                E1 = new Vector(Math.Cos(angle2) * e1.C[0] + 0 * e2.C[0] + Math.Sin(angle2) * e3.C[0], Math.Cos(angle2) * e1.C[1] + 0 * e2.C[1] + Math.Sin(angle2) * e3.C[1], Math.Cos(angle2) * e1.C[2] + 0 * e2.C[2] + Math.Sin(angle2) * e3.C[2]);
+                //E2 = e2;// new Vector(0 * e1.C[0] + 1 * e2.C[0] + 0 * e3.C[0], 0 * e1.C[1] + 1 * e2.C[1] + 0 * e3.C[1], 0 * e1.C[2] + 1 * e2.C[2] + 0 * e3.C[2]);
+                E3 = new Vector(-Math.Sin(angle2) * e1.C[0] + 0 * e2.C[0] + Math.Cos(angle2) * e3.C[0], -Math.Sin(angle2) * e1.C[1] + 0 * e2.C[1] + Math.Cos(angle2) * e3.C[1], -Math.Sin(angle2) * e1.C[2] + 0 * e2.C[2] + Math.Cos(angle2) * e3.C[2]);
+                e1 = E1;
+                //e2 = E2;
+                e3 = E3;
+            }
+            if (angle3 != 0)
+            {
+                E1 = new Vector(Math.Cos(angle3) * e1.C[0] + Math.Sin(angle3) * e2.C[0] + 0 * e3.C[0], Math.Cos(angle3) * e1.C[1] + Math.Sin(angle3) * e2.C[1] + 0 * e3.C[1], Math.Cos(angle3) * e1.C[2] + Math.Sin(angle3) * e2.C[2] + 0 * e3.C[2]);
+                E2 = new Vector(-Math.Sin(angle3) * e1.C[0] + Math.Cos(angle3) * e2.C[0] + 0 * e3.C[0], -Math.Sin(angle3) * e1.C[1] + Math.Cos(angle3) * e2.C[1] + 0 * e3.C[1], -Math.Sin(angle3) * e1.C[2] + Math.Cos(angle3) * e2.C[2] + 0 * e3.C[2]);
+                //E3 = e3;// new Vector(0 * e1.C[0] + 0 * e2.C[0] + 1 * e3.C[0], 0 * e1.C[1] + 0 * e2.C[1] + 1 * e3.C[1], 0 * e1.C[2] + 0 * e2.C[2] + 1 * e3.C[2]);
+            }
+            
             //матрицы перехода:
             /*
              вокруг оси Х:
@@ -87,19 +112,52 @@ namespace Dimensions
             E2 = new Vector(0, 1, 0);
             E3 = new Vector(0, 0, 1);
         }
-        public static void draw_point(d3 point, PictureBox p, Graphics g)
+        public static void draw_point1(d3 point, PictureBox p, Graphics g)
         {//отображение точки на пикчерБоксе
-            point.x = point.X * E1.C[0] + point.Y * E1.C[1] + point.Z * E1.C[2];
-            point.y = point.X * E2.C[0] + point.Y * E2.C[1] + point.Z * E2.C[2];
+            point.x = point.X * E1.C[0] + point.Y * E2.C[0] + point.Z * E3.C[0];
+            point.y = point.X * E1.C[1] + point.Y * E2.C[1] + point.Z * E3.C[1];
             g.FillEllipse(Brushes.White, (float)point.x + p.Width / 2, (float)point.y + p.Height / 2, 2, 2);
+            //отличие этого отображения в том, что при вращении это отображение будет вращатся вокруг статичного внешнего базиса
         }
-        public static void draw_line(d3 point1,d3 point2, PictureBox p, Graphics g)
+        public static void draw_line1(d3 point1,d3 point2, PictureBox p, Graphics g)
         {//отображение прямой на пикчерБоксе
             point1.x = point1.X * E1.C[0] + point1.Y * E1.C[1] + point1.Z * E1.C[2];
             point1.y = point1.X * E2.C[0] + point1.Y * E2.C[1] + point1.Z * E2.C[2];
             point2.x = point2.X * E1.C[0] + point2.Y * E1.C[1] + point2.Z * E1.C[2];
             point2.y = point2.X * E2.C[0] + point2.Y * E2.C[1] + point2.Z * E2.C[2];
             g.DrawLine(Pens.White, (float)point1.x + p.Width / 2, (float)point1.y + p.Height / 2, (float)point2.x + p.Width / 2, (float)point2.y + p.Height / 2);
+            //отличие этого отображения в том, что при вращении это отображение будет вращатся вокруг статичного внешнего базиса
+        }
+        public static void draw_line(d3 point1, d3 point2, PictureBox p, Graphics g)
+        {
+            point1.x = point1.X * E1.C[0] + point1.Y * E2.C[0] + point1.Z * E3.C[0];
+            point1.y = point1.X * E1.C[1] + point1.Y * E2.C[1] + point1.Z * E3.C[1];
+            point2.x = point2.X * E1.C[0] + point2.Y * E2.C[0] + point2.Z * E3.C[0];
+            point2.y = point2.X * E1.C[1] + point2.Y * E2.C[1] + point2.Z * E3.C[1];
+            g.DrawLine(Pens.Black, (float)point1.x + p.Width / 2, (float)point1.y + p.Height / 2, (float)point2.x + p.Width / 2, (float)point2.y + p.Height / 2);
+        }
+        public static void draw_point(d3 point, PictureBox p, Graphics g)
+        {
+            d3 x = point;
+            x.x = x.X * E1.C[0] + x.Y * E2.C[0] + x.Z * E3.C[0];
+            x.y = x.X * E1.C[1] + x.Y * E2.C[1] + x.Z * E3.C[1];
+            g.FillEllipse(Brushes.Black, (float)x.x + p.Width / 2, (float)x.y + p.Height / 2, 2, 2);
+            
+        }
+        static void draw_line_color(d3 point1, d3 point2, PictureBox p, Graphics g, Color col)
+        {
+            Pen pn = new Pen(col);
+            g.DrawLine(pn, (float)point1.X + p.Width / 2, (float)point1.Y + p.Height / 2, (float)point2.X + p.Width / 2, (float)point2.Y + p.Height / 2);
+        }
+        public static void draw_basis(PictureBox p, Graphics g)
+        {
+            d3 x = new d3(100 * E1[0], 100 * E1[1], 100 * E1[2]);
+            d3 y = new d3(100 * E2[0], 100 * E2[1], 100 * E2[2]);
+            d3 z = new d3(100 * E3[0], 100 * E3[1], 100 * E3[2]);
+            d3 zero = new d3(0, 0, 0);
+            draw_line_color(zero, x, p, g, Color.Red);
+            draw_line_color(zero, y, p, g, Color.Green);
+            draw_line_color(zero, z, p, g, Color.Blue);
         }
     }
 }

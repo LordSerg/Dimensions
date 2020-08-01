@@ -15,6 +15,14 @@ namespace Dimensions
         public double[] C;//некоторое количество "измерений" (или координат) вектора
         public double this[int i] => C[i];//для прямого обращения к элементам вектора
         public Vector() { }
+        public Vector(Vector a)
+        {
+            C = new double[a.C.Length];
+            for (int i = 0; i < a.C.Length; i++)
+            {
+                C[i] = a[i];
+            }
+        }
         public Vector(params double[] coord1)
         {
             C = new double[coord1.Length];
@@ -53,9 +61,10 @@ namespace Dimensions
         }
         public static Vector operator *(double s, Vector a)
         {//умножение скаляра на вектор
-            for (int i = 0; i < a.C.Length; i++)
-                a.C[i] *= s;
-            return a;
+            Vector x = a;
+            for (int i = 0; i < x.C.Length; i++)
+                x.C[i] *= s;
+            return x;
         }
         public static Vector operator *(Vector a, Vector b)
         {//векторное умножение
@@ -100,7 +109,7 @@ namespace Dimensions
         {//конвертация в стринг
             string x = "( ";
             for (int i = 0; i < C.Length; i++)
-                x += (Math.Round(C[i], 2)).ToString() + " ";
+                x += (Math.Round(C[i],2)).ToString() + " ";
             x += ")";
             return x;
         }

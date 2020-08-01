@@ -57,6 +57,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Second_Dimensions.cs" />
+    <Compile Include="Sixth_Dimensions.cs" />
     <Compile Include="Third_Dimensions.cs" />
     <Compile Include="Vector.cs" />
     <EmbeddedResource Include="Form1.resx">
