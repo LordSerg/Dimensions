@@ -18,3 +18,13 @@ D:\_My_Math\_Dimensions\Dimensions\obj\Debug\Dimensions.csproj.GenerateResource.
 D:\_My_Math\_Dimensions\Dimensions\obj\Debug\Dimensions.csproj.CoreCompileInputs.cache
 D:\_My_Math\_Dimensions\Dimensions\obj\Debug\Dimensions.exe
 D:\_My_Math\_Dimensions\Dimensions\obj\Debug\Dimensions.pdb
+D:\_My_Math\!GrafixEngins\Dimensions\Dimensions\bin\Debug\Dimensions.exe.config
+D:\_My_Math\!GrafixEngins\Dimensions\Dimensions\bin\Debug\Dimensions.exe
+D:\_My_Math\!GrafixEngins\Dimensions\Dimensions\bin\Debug\Dimensions.pdb
+D:\_My_Math\!GrafixEngins\Dimensions\Dimensions\obj\Debug\Dimensions.csproj.AssemblyReference.cache
+D:\_My_Math\!GrafixEngins\Dimensions\Dimensions\obj\Debug\Dimensions.Form1.resources
+D:\_My_Math\!GrafixEngins\Dimensions\Dimensions\obj\Debug\Dimensions.Properties.Resources.resources
+D:\_My_Math\!GrafixEngins\Dimensions\Dimensions\obj\Debug\Dimensions.csproj.GenerateResource.cache
+D:\_My_Math\!GrafixEngins\Dimensions\Dimensions\obj\Debug\Dimensions.csproj.CoreCompileInputs.cache
+D:\_My_Math\!GrafixEngins\Dimensions\Dimensions\obj\Debug\Dimensions.exe
+D:\_My_Math\!GrafixEngins\Dimensions\Dimensions\obj\Debug\Dimensions.pdb

@@ -1560,5 +1560,10 @@ namespace Dimensions
             d5.reset();
             d6.reset();
         }
+
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+
+        }
     }
 }
