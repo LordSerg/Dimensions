@@ -61,7 +61,7 @@ $$
 ### For rotating
 Any object (cube, for example) can be rotated using these matices.
 
-For rotating any object in nD-space you just have to represent every point of objet as a vector and than **multiply a matrix by vector**:
+For rotating any object in nD-space you just have to represent every point of object as a vector and then **multiply a matrix by vector**:
 
 to rotate 3D point p 
 
