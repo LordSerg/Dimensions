@@ -22,7 +22,25 @@ $$k = {n*(n-1) \over 2}$$
 
 Multiplying rotation matrices between each other results matrix of combined rotation
 
-## for example
+## Examples
+
+### 2D rotation
+![2D Rotation example](animations/2d.gif)
+
+### 3D rotation
+![3D Rotation example](animations/3d.gif)
+
+### 4D rotation
+![4D Rotation example](animations/4d.gif)
+
+### 5D rotation
+![5D Rotation example](animations/5d.gif)
+
+### 6D rotation
+![6D Rotation example](animations/6d.gif)
+
+
+## Math explanation
 ### for 2D space the matrix looks like this:
 
 $$
